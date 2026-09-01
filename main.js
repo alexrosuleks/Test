@@ -6,7 +6,7 @@ const DEFAULTS = {
     proxyHost: 'rp.evomi.com',
     proxyPort: 1000,
     proxyUsername: 'internal_prod_scraper',
-    proxyPasswordTemplate: 'cn7LCzbjONWcAaX8Xnw6_country-{country}_session-{session}',
+    proxyPasswordTemplate: 'cn7LCzbjONWcAaX8Xnw6_country-{country}~session-{session}',
     countries: ['us', 'de'],
     sessionsPerCountry: 1,
     checkPlatformFallback: true,
