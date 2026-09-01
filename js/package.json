@@ -1,0 +1,10 @@
+{
+  "name": "byop-test-js",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "BYO (Evomi) proxy test actor for the Scrapely Node SDK",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  }
+}
