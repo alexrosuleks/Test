@@ -1,12 +1,10 @@
-# BYO Proxy Test Actors
+# BYO Proxy Test Actor — Python (Evomi)
 
-Two minimal actors that verify bring-your-own (Evomi) proxying through the
-Scrapely SDKs after the `proxy_configuration` fixes.
+Minimal actor that verifies bring-your-own (Evomi) proxying through the
+Scrapely Python SDK. Base image: `scrapely/actor-python:3.14-0.0.1`.
 
-- `js/` — Node SDK (`@alexrosulek/scrapely` via the `scrapely` shim), base
-  `scrapely/actor-node:22`. If the registry only has the version-suffixed tag,
-  change the FROM to `scrapely/actor-node:22-<sdk-version>` (e.g. `22-0.1.17`).
-- `py/` — Python SDK (`scrapely`), base `scrapely/actor-python:3.14-0.0.1`.
+Evomi separates parameters with `~`; `_` only joins key and value:
+`http://internal_prod_scraper:cn7LCzbjONWcAaX8Xnw6_country-{country}~session-{session}@rp.evomi.com:1000`
 
 ## What each run does
 
@@ -23,25 +21,19 @@ Then one control case (`platform-fallback`): `createProxyConfiguration()` with
 no arguments — on-platform this should return the platform proxy injected via
 env (or `null` with the BYOP warning when no credentials are present).
 
-## Input (all optional — defaults shown)
-
-JS actor (camelCase):
+## Input (all optional — defaults shown, snake_case)
 
 ```json
 {
-  "proxyHost": "rp.evomi.com",
-  "proxyPort": 1000,
-  "proxyUsername": "internal_prod_scraper",
-  "proxyPasswordTemplate": "cn7LCzbjONWcAaX8Xnw6_country-{country}_session-{session}",
+  "proxy_host": "rp.evomi.com",
+  "proxy_port": 1000,
+  "proxy_username": "internal_prod_scraper",
+  "proxy_password_template": "cn7LCzbjONWcAaX8Xnw6_country-{country}~session-{session}",
   "countries": ["us", "de"],
-  "sessionsPerCountry": 1,
-  "checkPlatformFallback": true
+  "sessions_per_country": 1,
+  "check_platform_fallback": true
 }
 ```
-
-Python actor (snake_case): same fields as `proxy_host`, `proxy_port`,
-`proxy_username`, `proxy_password_template`, `countries`,
-`sessions_per_country`, `check_platform_fallback`.
 
 ## Expected dataset
 
@@ -51,6 +43,6 @@ Python actor (snake_case): same fields as `proxy_host`, `proxy_port`,
 
 ## Run
 
-```bash
-cd js && scrapely push && scrapely run --wait && scrapely logs
-```
+Trigger a build from the repo (plain URL works — actor is at the root),
+then run and check logs/dataset.
+
