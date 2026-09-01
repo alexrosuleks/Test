@@ -1,0 +1,8 @@
+{
+  "name": "byop-test-py",
+  "version": "1.0.0",
+  "entrypoint": "main.py",
+  "maxMemory": 512,
+  "maxTimeout": 600,
+  "description": "Tests bring-your-own Evomi proxies through the Scrapely Python SDK: per-country/session exit IPs, session stickiness, and the no-input platform-proxy fallback. All defaults overridable via actor input."
+}

@@ -13,7 +13,8 @@ Scrapely SDKs after the `proxy_configuration` fixes.
 For every `(country, session)` pair (defaults `us`/`de`, 1 session each):
 
 1. Builds the Evomi proxy URL:
-   `http://internal_prod_scraper:cn7LCzbjONWcAaX8Xnw6_country-{country}_session-{session}@rp.evomi.com:1000`
+   `http://internal_prod_scraper:cn7LCzbjONWcAaX8Xnw6_country-{country}~session-{session}@rp.evomi.com:1000`
+   (Evomi separates parameters with `~`; `_` only joins key and value)
 2. Creates a `ProxyConfiguration` with that URL as `proxyUrls`/`proxy_urls`
 3. Makes **2 requests** to `https://api.ipify.org?format=json` through it
 4. Records exit IPs + session stickiness (same session ⇒ same IP) to the dataset
